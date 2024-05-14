@@ -10,6 +10,11 @@ import org.apache.logging.log4j.Logger;
 
 import static pgwire.SenderUtils.*;
 
+
+/**
+ * A {@link BackendMessageListener} that sends backend messages back to the client.
+ *
+ */
 public class BackendMessageSender implements BackendMessageListener<ChannelHandlerContext, ByteBuf, ByteBuf> {
   private static final Logger LOGGER = LogManager.getLogger(BackendMessageSender.class);
 

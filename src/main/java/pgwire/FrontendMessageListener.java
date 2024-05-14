@@ -3,6 +3,21 @@ package pgwire;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * The class that has to be implemented to add the server logic.
+ *
+ * <p>
+ * Most simple implementations can delegate on a {@link FrontendMessageListener.Abstract}, which throws on not
+ * methods that are not override.
+ * It is also recommended to instantiate a {@link BackendMessageSender} in order to respond to the customer.
+ * <p>
+ * For a given channel (aka connection) at most one method can be called at the time.
+ *
+ * @param <C> The type of the context. Usually a {@link io.netty.channel.ChannelHandlerContext}
+ * @param <S> The type of the strings. Usually a {@link io.netty.buffer.ByteBuf}
+ * @param <B> The type of the bytes. Usually a {@link io.netty.buffer.ByteBuf}
+ */
 public interface FrontendMessageListener<C, S, B> {
 
   /**

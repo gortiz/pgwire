@@ -9,6 +9,12 @@ import io.netty.handler.logging.LoggingHandler;
 import java.util.function.IntFunction;
 
 
+/**
+ * This is the default ChannelInitializer.
+ * <p>
+ * The default pipeline consist of a {@link LoggingHandler}, a {@link PgFrameDecoder} and
+ * a {@link FrontendMessageListener}.
+ */
 public class PostgresBackendChannelInitializer extends ChannelInitializer<SocketChannel> {
 
   private final IntFunction<PgType> typeLibrary;

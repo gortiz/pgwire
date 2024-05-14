@@ -8,6 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
+/**
+ * The class that frames a plain {@link ByteBuf} into smaller {@link ByteBuf} where each one contains exactly one
+ * message.
+ */
 public class PgFrameDecoder extends ByteToMessageDecoder {
   private static final Logger LOGGER = LogManager.getLogger();
   private boolean expectingStartup;

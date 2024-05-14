@@ -11,6 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
+/**
+ * The handler that frontend messages and process them by delegating into a {@link FrontendMessageListener}.
+ */
 public class FrontendPostgresHandler extends AbstractPostgresHandler {
 
   private static final Logger LOGGER = LogManager.getLogger(FrontendPostgresHandler.class);

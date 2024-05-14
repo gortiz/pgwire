@@ -83,19 +83,39 @@ public abstract class PostgresServer {
     return channel.close();
   }
 
+  /**
+   * A method that can be used to define the type library used by the system
+   */
   protected IntFunction<PgType> createLibrary() {
     return new StandardTypeLibrary();
   }
 
+  /**
+   * Returns the {@link FrontendMessageListener} that will be used to process messages sent by client processes
+   * (usually drivers).
+   */
   protected abstract FrontendMessageListener<ChannelHandlerContext, ByteBuf, ByteBuf> createMessageListener();
 
+  /**
+   * The life cycle method that is called before the server is started.
+   *
+   * This method can be used to configure the Netty ChannelFuture.
+   */
   protected void beforeStart(ChannelFuture channelFuture) {
   }
 
+  /**
+   * The life cycle method that is called before one each event loop is shut down.
+   */
   protected void shutdownGroup(EventLoopGroup group) {
     group.shutdownGracefully(0, 1000, TimeUnit.MILLISECONDS);
   }
 
+  /**
+   * A method that can be used to change the ServerChannel that is instantiated.
+   *
+   * By default {@link NioServerSocketChannel} is used
+   */
   protected Class<? extends ServerChannel> getChannelClass() {
     return NioServerSocketChannel.class;
   }

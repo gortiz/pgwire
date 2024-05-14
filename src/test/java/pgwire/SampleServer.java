@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
+/**
+ * A simple server that always return the same data.
+ */
 public class SampleServer {
 
   public static void main(String[] args)
