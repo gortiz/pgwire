@@ -10,8 +10,12 @@ import static pgwire.SenderUtils.*;
 
 
 /**
- * A {@link BackendMessageListener} that sends backend messages back to the client.
+ * This is the class that sends messages to the client, hiding the lower level details of the protocol like the order
+ * between fields and most of the magic numbers used in the protocol.
  *
+ * By using this class, servers can focus on what they want to send and not how to send it.
+ * This class is still pretty low level and other higher level apis (like {@link High} or even a BackendMessageListener
+ * that uses Strings and byte[]) could be created on top of this.
  */
 public class BackendMessageSender implements BackendMessageListener<ChannelHandlerContext, ByteBuf, ByteBuf> {
 

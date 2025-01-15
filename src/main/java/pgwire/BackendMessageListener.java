@@ -1,10 +1,31 @@
 package pgwire;
 
+import io.netty.channel.ChannelHandlerContext;
 import java.util.List;
 import java.util.Map;
 
 // TODO: Add proper authentication methods
 
+/**
+ * A listener for messages sent by the backend.
+ *
+ * Like {@link FrontendMessageListener}, this interface is used to execute a side effect related to the backend
+ * protocol. There are two main usages:
+ * <ol>
+ *   <li>Implement a server. In this case, the listener is usually a {@link BackendMessageSender} and the action
+ *   of calling one of the <em>onXXX</em> message means to send that event to the frontend (client).</li>
+ *   <li>Implement a client. In this case, the listener should be provided by the client and would be called by
+ *   {@link BackendPostgresHandler}</li>
+ * </ol>
+ *
+ * Other usages are possible, for example mocking.
+ *
+ * @param <C> The context, usually a {@link ChannelHandlerContext}
+ * @param <S> The type of the strings. The easiest type to use is {@link String}, but {@link io.netty.buffer.ByteBuf}
+ *           would be usually more efficient.
+ * @param <B> The type of the bytes. The easiest type to use is {@link byte[]}, but {@link io.netty.buffer.ByteBuf}
+ *           would be usually more efficient.
+ */
 public interface BackendMessageListener<C, S, B> {
 
   void onBindComplete(C ctx);

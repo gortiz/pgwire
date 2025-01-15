@@ -8,8 +8,8 @@ import java.util.Map;
  * The class that has to be implemented to add the server logic.
  *
  * <p>
- * Most simple implementations can delegate on a {@link FrontendMessageListener.Abstract}, which throws on not
- * methods that are not override.
+ * Most simple implementations can delegate on a {@link FrontendMessageListener.Abstract}, which throws on all
+ * methods. This way the implementor only has to implement the methods that are relevant to the server logic.
  * It is also recommended to instantiate a {@link BackendMessageSender} in order to respond to the customer.
  * <p>
  * For a given channel (aka connection) at most one method can be called at the time.

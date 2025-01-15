@@ -8,6 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * Higher level API for {@link BackendMessageListener}.
+ *
+ * Although it is easier to send data in this way, it is also less efficient than using BackendMessageListener
+ * directly given the onDataRow methods allocate a new ArrayList each time.
+ */
 public class High<C, V, B> {
 
   private final BackendMessageListener<C, ?, B> listener;

@@ -11,13 +11,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class BackendPosgresHandler extends AbstractPostgresHandler {
+/**
+ * This class can be used to decode messages from the backend.
+ *
+ * This could be useful to implement a postgres client (or driver) or a proxy.
+ */
+public class BackendPostgresHandler extends AbstractPostgresHandler {
 
-  private static final Logger LOGGER = LogManager.getLogger(BackendPosgresHandler.class);
+  private static final Logger LOGGER = LogManager.getLogger(BackendPostgresHandler.class);
   private final IntFunction<PgType> typeLibrary;
   private final BackendMessageListener<ChannelHandlerContext, ByteBuf, ByteBuf> listener;
 
-  public BackendPosgresHandler(IntFunction<PgType> typeLibrary,
+  public BackendPostgresHandler(IntFunction<PgType> typeLibrary,
       BackendMessageListener<ChannelHandlerContext, ByteBuf, ByteBuf> listener) {
     this.typeLibrary = typeLibrary;
     this.listener = listener;

@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * The handler that frontend messages and process them by delegating into a {@link FrontendMessageListener}.
+ *
+ * This is the handler used by {@link PostgresServer} to process messages from the client.
  */
 public class FrontendPostgresHandler extends AbstractPostgresHandler {
 
