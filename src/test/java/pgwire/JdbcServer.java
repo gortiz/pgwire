@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.pinot.client.PinotDriver;
 
 
 public class JdbcServer extends PostgresServer {
+  private static final Logger LOGGER = LogManager.getLogger(JdbcServer.class);
 
   private final DataSource dataSource;
 
@@ -59,7 +61,9 @@ public class JdbcServer extends PostgresServer {
           sender.onBackendKeyData(ctx, 123, 123);
           sender.onReadyForQuery(ctx, TransactionStatus.IDLE);
         } catch (SQLException e) {
-          throw new RuntimeException(e);
+          LOGGER.error("Failed to connect to data source", e);
+          // TODO: send error to client
+          sender.onReadyForQuery(ctx, TransactionStatus.IDLE);
         }
       }
 
@@ -87,9 +91,9 @@ public class JdbcServer extends PostgresServer {
           }
 
         } catch (SQLException e) {
-          throw new RuntimeException(e);
+          LOGGER.error("Failed to execute query {}", queryStr, e);
+          // TODO: send error to client
         }
-
         sender.onCommandComplete(ctx, 3, CommandType.SELECT);
         sender.onReadyForQuery(ctx, TransactionStatus.IDLE);
       }
@@ -215,7 +219,7 @@ public class JdbcServer extends PostgresServer {
     }
 
     @Override
-    public Logger getParentLogger()
+    public java.util.logging.Logger getParentLogger()
         throws SQLFeatureNotSupportedException {
       return null;
     }
