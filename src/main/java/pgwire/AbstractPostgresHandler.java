@@ -31,11 +31,11 @@ public abstract class AbstractPostgresHandler extends SimpleChannelInboundHandle
   public static ByteBuf readNullEndedSlice(ByteBuf buf) {
     int length = buf.bytesBefore((byte) 0);
     if (length < 0) {
-      return new EmptyByteBuf(buf.alloc());
+      return buf.readSlice(0);
     }
-    ByteBuf slice = buf.readSlice(length);
+    ByteBuf byteBuf = buf.readSlice(length);
     buf.readByte();
-    return slice;
+    return byteBuf;
   }
 
   public static String readNullEndedString(ByteBuf buf) {

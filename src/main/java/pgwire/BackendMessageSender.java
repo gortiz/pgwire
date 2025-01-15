@@ -5,8 +5,6 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import static pgwire.SenderUtils.*;
 
@@ -16,7 +14,6 @@ import static pgwire.SenderUtils.*;
  *
  */
 public class BackendMessageSender implements BackendMessageListener<ChannelHandlerContext, ByteBuf, ByteBuf> {
-  private static final Logger LOGGER = LogManager.getLogger(BackendMessageSender.class);
 
   @Override
   public void onBindComplete(ChannelHandlerContext ctx) {
